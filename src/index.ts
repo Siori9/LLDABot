@@ -2,7 +2,7 @@ import { Client, Intents, Message } from 'discord.js'
 import './server'
 
 const bot = new Client({
-  intents: [Intents.FLAGS.GUILD_MESSAGES]
+  intents: [Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.DIRECT_MESSAGES]
 })
 
 const token = process.env.DISCORD_TOKEN
