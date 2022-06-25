@@ -22,6 +22,7 @@ bot.login(token);
 //C'était juste un simple test 
 //j'imagine oui ^^ c'est juste que j'ai vu ça en cherchant sur la doc de Discord je me suis dit que ça t'aiderais
 bot.on('messageCreate', async (message: Message) => {
+    console.log(message)
     if (message.content === "!poufpouf") {
       await message.channel.send("Pong.")
     }
