@@ -1,8 +1,8 @@
-import { Client, Message } from 'discord.js'
+import { Client, Intents, Message } from 'discord.js'
 import './server'
 
 const bot = new Client({
-  intents: []
+  intents: [Intents.FLAGS.GUILD_MESSAGES]
 })
 
 const token = process.env.DISCORD_TOKEN
