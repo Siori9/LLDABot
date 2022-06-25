@@ -9,9 +9,7 @@ const token = process.env.DISCORD_TOKEN
 
 bot.once('ready', () => {
    console.log('Félicitations, votre bot Discord a été correctement initialisé !');
-});
-
-bot.login(token);
+})
 
 /** 
  * attention l'évenement 'message' sur un Client est déprécié d'après la doc discord
@@ -21,9 +19,11 @@ bot.login(token);
 
 //C'était juste un simple test 
 //j'imagine oui ^^ c'est juste que j'ai vu ça en cherchant sur la doc de Discord je me suis dit que ça t'aiderais
-bot.on('messageCreate', async (message: Message) => {
+bot.on('messageCreate', (message: Message) => {
     console.log(message)
     if (message.content === "!poufpouf") {
-      await message.channel.send("Pong.")
+      message.channel.send("Pong.")
     }
 })
+
+bot.login(token)
