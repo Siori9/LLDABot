@@ -20,7 +20,7 @@ bot.once('ready', () => {
 //C'était juste un simple test 
 //j'imagine oui ^^ c'est juste que j'ai vu ça en cherchant sur la doc de Discord je me suis dit que ça t'aiderais
 bot.on('messageCreate', (message: Message) => {
-    console.log(message)
+    console.log(message.toJSON())
     if (message.content === "!poufpouf") {
       message.channel.send("Pong.")
     }
