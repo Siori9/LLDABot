@@ -1,24 +1,23 @@
-import { Collection } from 'discord.js';
+import { Collection, User } from 'discord.js';
 import mongoose, { Schema, Types, model } from 'mongoose';
 
 interface Personnage {
-    id: Types.ObjectId
     nom: string
     proprietaire: string
     guide: Types.ObjectId
     selectionne: boolean
     metier?: {
-        type: Types.ObjectId
-        pointMetier: number
+        type?: Types.ObjectId
+        pointMetier?: number
     }
     guild?: Types.ObjectId
     familierPrinc?: Types.ObjectId
     familiers?: {
-        id: Types.ObjectId
-        type: Types.ObjectId
-        nom: string
-        niveau: number
-        experience: number
+        id?: Types.ObjectId
+        type?: Types.ObjectId
+        nom?: string
+        niveau?: number
+        experience?: number
     }[]
     niveau: number
     experience: number
@@ -37,38 +36,37 @@ interface Personnage {
     attaques: Types.ObjectId[]
     attselects?: Types.ObjectId[]
     equipements?: {
-        etat: number
-        type: Types.ObjectId
+        etat?: number
+        type?: Types.ObjectId
     }[]
     items: Types.ObjectId[]
     quetes?: {
-        etape: number
+        etape?: number
         etat?: Collection<Types.ObjectId,number>
-        type: Types.ObjectId
-        valid: boolean
+        type?: Types.ObjectId
+        valid?: boolean
     }[]
     cristaux?: Types.ObjectId[]
     symbols?: Types.ObjectId[]
 }
 
 const schemaPersonnage = new Schema<Personnage>({
-    id: { type: mongoose.Schema.Types.ObjectId},
     nom: { type: String, required: true },
     proprietaire: { type: String, required: true },
     guide: { type: mongoose.Schema.Types.ObjectId, ref: 'Guide', required: true},
     selectionne: {type: Boolean, required: true},
     metier: {
-        type: {type: mongoose.Schema.Types.ObjectId, ref: 'Metier', required: true},
-        pointMetier: {type: Number, required: true}
+        type: {type: mongoose.Schema.Types.ObjectId, ref: 'Metier'},
+        pointMetier: {type: Number}
     },
     guild: {type: mongoose.Schema.Types.ObjectId, ref: 'Guild'},
     familierPrinc: {type: mongoose.Schema.Types.ObjectId},
     familiers: {
-        id: {type: mongoose.Schema.Types.ObjectId, required: true},
+        id: {type: mongoose.Schema.Types.ObjectId},
         type: {type: mongoose.Schema.Types.ObjectId, ref: 'Familier'},
-        nom: { type: String, required: true },
-        niveau: {type: Number, required: true},
-        experience: {type: Number, required: true},
+        nom: { type: String},
+        niveau: {type: Number},
+        experience: {type: Number},
     },
     niveau: {type: Number, required: true},
     experience: {type: Number, required: true},
@@ -87,18 +85,18 @@ const schemaPersonnage = new Schema<Personnage>({
     attaques: { type: [mongoose.Schema.Types.ObjectId], ref: 'Attaque', required: true},
     attselects: { type: [mongoose.Schema.Types.ObjectId], ref: 'Attaque'},
     equipements: {
-        etat: { type: Number, required: true},
+        etat: { type: Number},
         type: { type: [mongoose.Schema.Types.ObjectId], ref: 'Item'},
     },
     items: {type: [mongoose.Schema.Types.ObjectId], ref: 'Item', required: true},
     quetes: {
-        etape: {type: Number, required: true},
+        etape: {type: Number},
         etat: { type: Number},
-        type: {type: [mongoose.Schema.Types.ObjectId], ref: 'Quete', required: true},
+        type: {type: [mongoose.Schema.Types.ObjectId], ref: 'Quete'},
         valid: { type: Boolean},
     },
     cristaux: {type: [mongoose.Schema.Types.ObjectId], ref: 'Item'},
     symbols: {type: [mongoose.Schema.Types.ObjectId], ref: 'Item'},
 });
 
-const PersonnageEntity = model<Personnage>('User', schemaPersonnage);
+export const PersonnageEntity = model<Personnage>('Personnage', schemaPersonnage);
