@@ -1,6 +1,6 @@
-import { Command } from "./Command"
-import { miscCommands } from "./misc"
+import { EntreeUtilisateurCommande } from "./Command"
+import { diversCommands } from "./divers"
 
-export const commands: Command[] = [
-    miscCommands
+export const commandes: EntreeUtilisateurCommande[] = [
+    diversCommands
 ].flat()

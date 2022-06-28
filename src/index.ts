@@ -1,5 +1,5 @@
 import { Client, Intents } from 'discord.js'
-import { commands } from './commands'
+import { commandes } from './commands'
 import { onceReady, onInteractionCreate } from './handlers'
 import { connect } from './db'
 import './server'
@@ -17,7 +17,7 @@ connect().then(() => {
   console.log("Successfuly connected to database")
 })
 
-onceReady(bot, commands)
-onInteractionCreate(bot, commands)
+onceReady(bot, commandes)
+onInteractionCreate(bot, commandes)
 
 bot.login(token)

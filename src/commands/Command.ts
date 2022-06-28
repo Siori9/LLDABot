@@ -1,6 +1,7 @@
-import { ApplicationCommandDataResolvable, Client, CommandInteraction } from "discord.js";
+import { ChatInputApplicationCommandData, Client, CommandInteraction } from "discord.js";
 
-export interface Command {
-    data: ApplicationCommandDataResolvable 
-    run(client: Client, interaction: CommandInteraction): Promise<void>
+export interface EntreeUtilisateurCommande {
+    data: ChatInputApplicationCommandData 
+    category: string
+    lancer(client: Client, interaction: CommandInteraction): Promise<void>
 }
