@@ -2,6 +2,9 @@ import { Client, CommandInteraction, ApplicationCommandNumericOptionData, Applic
 import { EntreeUtilisateurCommande } from '../Command'
 import mongoose from 'mongoose';
 import { nouvPerso } from '../../repositories/Users/CreerPerso'
+import { suppPerso } from '../../repositories/Users/SuppPerso'
+import { modifPerso } from '../../repositories/Users/ModifPerso'
+import { PersonnageEntity, Personnage} from '../../models/Users/Personnage'
 
 export const Test: EntreeUtilisateurCommande = {
 
@@ -18,8 +21,8 @@ export const Test: EntreeUtilisateurCommande = {
             } as ApplicationCommandOptionData,
         ]
     },
-
-    category: "HorsRp",
+    category: "Commande de test",
+    acces: "admin",
     async lancer(_: Client, interaction: CommandInteraction): Promise<void> {
 
         const user = interaction.client.user?.id
@@ -38,5 +41,48 @@ export const Test: EntreeUtilisateurCommande = {
         }
         
         
+    }
+}
+
+export const Test2: EntreeUtilisateurCommande = {
+
+    data: {
+        name: 'test2',
+        description: 'Commande de test',
+        descriptionLocalizations: {fr:'Commande de test'},
+        options: [
+            {
+                name: 'id',
+                description: 'Id personnage',
+                type: 'STRING',
+                required: true
+            } as ApplicationCommandOptionData,
+        ]
+    },
+    category: "Commande de test",
+    acces: "admin",
+    async lancer(_: Client, interaction: CommandInteraction): Promise<void> {
+        const idString = interaction.options.getString('id') ?? ""
+        const id = new mongoose.Types.ObjectId(idString)
+
+        const elem:Partial<Personnage> = {
+            nom: 'toto',
+            caracteristiques: {
+                force: 10,
+                vitalite: 1,
+                resistance: 1,
+                precision: 1,
+                intelligence: 1,
+                rapidite: 1,
+                magie: 1
+            }
+        }
+        
+        //suppPerso(id)
+
+        modifPerso(id,elem)
+        await interaction.followUp({
+            content: 'Personnage supprimé'
+        }) 
     }
 }

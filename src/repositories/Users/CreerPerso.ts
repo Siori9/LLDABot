@@ -1,6 +1,5 @@
 import { PersonnageEntity} from '../../models/Users/Personnage'
 import mongoose, { Types } from 'mongoose';
-import { User } from 'discord.js';
 
 export async function nouvPerso(proprio:string, nom:string, guide:Types.ObjectId, attaques: Types.ObjectId[],items: Types.ObjectId[]) {
     let personnage = new PersonnageEntity({
@@ -23,7 +22,8 @@ export async function nouvPerso(proprio:string, nom:string, guide:Types.ObjectId
             magie: 1
         },
         attaques: attaques,
-        items: items
+        items: items,
+        argent: 0
     })
 
     await personnage.save();
