@@ -1,0 +1,545 @@
+// // import mongoose, { Schema, Types, model } from 'mongoose';
+
+// export interface Personnage {
+//     nom: string
+//     proprietaire: string
+//     guide: Types.ObjectId
+//     selectionne: Boolean
+//     metier?: {
+//         type?: Types.ObjectId
+//         pointMetier?: Number
+//     }
+//     guild?: Types.ObjectId
+//     familierPrinc?: Types.ObjectId
+//     familiers?: {
+//         id?: Types.ObjectId
+//         type?: Types.ObjectId
+//         nom?: string
+//         niveau?: Number
+//         experience?: Number
+//     }[]
+//     niveau: Number
+//     experience: Number
+//     vito: Number
+//     pv: Number
+//     pm: Number
+//     caracteristiques: {
+//         force: Number
+//         vitalite: Number
+//         resistance: Number
+//         precision: Number
+//         intelligence: Number
+//         rapidite: Number
+//         magie: Number
+//     }
+//     attaques: Types.ObjectId[]
+//     attselects?: Types.ObjectId[]
+//     equipements?: {
+//         etat?: Number
+//         type?: Types.ObjectId
+//     }[]
+//     items: Collection<Types.ObjectId,Number>
+//     quetes?: {
+//         etape?: Number
+//         etat?: Collection<Types.ObjectId,Number>
+//         type?: Types.ObjectId
+//         valid?: Boolean
+//     }[]
+//     cristaux?: Types.ObjectId[]
+//     symbols?: Types.ObjectId[]
+//     argent: Number
+//     connaissances?: Types.ObjectId[]
+//     amis?: Types.ObjectId[]
+//     banque?: Types.ObjectId
+// }
+
+// const schemaPersonnage = new Schema<Personnage>({
+//     nom: { type: String, required: true },
+//     proprietaire: { type: String, required: true },
+//     guide: { type: mongoose.Schema.Types.ObjectId, ref: 'Guide', required: true},
+//     selectionne: {type: Boolean, required: true},
+//     metier: {
+//         type: {type: mongoose.Schema.Types.ObjectId, ref: 'Metier'},
+//         pointMetier: {type: Number}
+//     },
+//     guild: {type: mongoose.Schema.Types.ObjectId, ref: 'Guild'},
+//     familierPrinc: {type: mongoose.Schema.Types.ObjectId},
+//     familiers: [{
+//         id: {type: mongoose.Schema.Types.ObjectId},
+//         type: {type: mongoose.Schema.Types.ObjectId, ref: 'Creature'},
+//         nom: { type: String},
+//         niveau: {type: Number},
+//         experience: {type: Number},
+//     }],
+//     niveau: {type: Number, required: true},
+//     experience: {type: Number, required: true},
+//     vito: {type: Number, required: true},
+//     pv: {type: Number, required: true},
+//     pm: {type: Number, required: true},
+//     caracteristiques: {
+//         force: {type: Number, required: true},
+//         vitalite: {type: Number, required: true},
+//         resistance: {type: Number, required: true},
+//         precision: {type: Number, required: true},
+//         intelligence: {type: Number, required: true},
+//         rapidite: {type: Number, required: true},
+//         magie: {type: Number, required: true}
+//     },
+//     attaques: { type: [mongoose.Schema.Types.ObjectId], ref: 'Attaque', required: true},
+//     attselects: { type: [mongoose.Schema.Types.ObjectId], ref: 'Attaque'},
+//     equipements: [{
+//         etat: { type: Number},
+//         type: { type: mongoose.Schema.Types.ObjectId, ref: 'Equipement' },
+//     }],
+//     items: {type: Map<mongoose.Schema.Types.ObjectId,Number>, ref: 'Item' || 'Ressource' || 'Utilitaire' || 'ObjetQuete' || 'Equipement', required: true},
+//     quetes: [{
+//         etape: {type: Number},
+//         etat: { type: Number},
+//         type: {type: mongoose.Schema.Types.ObjectId, ref: 'Quete'},
+//         valid: { type: Boolean},
+//     }],
+//     cristaux: {type: [mongoose.Schema.Types.ObjectId], ref: 'Item'},
+//     symbols: {type: [mongoose.Schema.Types.ObjectId], ref: 'Item'},
+//     argent: {type: Number, required: true},
+//     connaissances: {type: [mongoose.Schema.Types.ObjectId], ref: 'Pnj' || 'Guide'},
+//     amis: {type: [mongoose.Schema.Types.ObjectId], ref: 'Personnage'},
+//     banque: {type: mongoose.Schema.Types.ObjectId, ref: 'Banque'},
+// });
+
+// export const PersonnageEntity = model<Personnage>('Personnage', schemaPersonnage);
+
+// export interface Metier {
+//     nom: string
+//     bonus: {
+//         type: Types.ObjectId
+//         lvl: number
+//     }
+//     lieuxApprentissage: Types.ObjectId[]
+//     description: string
+//     quete?: Types.ObjectId[]
+//     fabrication: Collection<number,Array<Types.ObjectId>>
+// }
+
+// const schemaMetier = new Schema<Metier>({
+//     nom: { type: String, required: true },
+//     bonus: {
+//         type: {type: mongoose.Schema.Types.ObjectId, ref: 'Bonus'},
+//         lvl: {type: Number, required: true},
+//     },
+//     lieuxApprentissage: [{type: mongoose.Schema.Types.ObjectId, ref: 'Lieux'}],
+//     description: { type: String, required: true },
+//     quete: [{type: mongoose.Schema.Types.ObjectId, ref: 'Quete'}],
+//     fabrication: {type: Collection<Number, Array<Types.ObjectId>>, ref: 'Item' || 'Equipement'}
+// })
+
+// export const MetierEntity = model<Metier>('Metier', schemaMetier);
+
+// import mongoose, { Schema, Types, model } from 'mongoose';
+
+// export interface Guilde {
+//     nom: string
+//     chef: Types.ObjectId
+//     banque?: Types.ObjectId
+//     ajoints: Types.ObjectId[]
+//     lieux?: Types.ObjectId
+//     membres: Types.ObjectId[]
+//     description: string
+//     devise: string
+//     banniere: string
+//     argent: number
+//     trophe?: Types.ObjectId[]
+//     quetes?: {
+//         etape?: number
+//         etat?: Collection<Types.ObjectId,number>
+//         type?: Types.ObjectId
+//         valid?: boolean
+//     }[]
+//     niveau: number
+//     experience: number
+// }
+
+// const schemaGuilde = new Schema<Guilde>({
+//     nom: { type: String, required: true },
+//     chef: {type: mongoose.Schema.Types.ObjectId, ref: 'Personnage', required: true},
+//     banque: {type: mongoose.Schema.Types.ObjectId, ref: 'Banque'},
+//     ajoints: [{type: mongoose.Schema.Types.ObjectId, ref: 'Personnage', required: true}],
+//     lieux: {type: mongoose.Schema.Types.ObjectId, ref: 'Place'},
+//     membres: [{type: mongoose.Schema.Types.ObjectId, ref: 'Personnage', required: true}],
+//     description: { type: String, required: true },
+//     devise: { type: String, required: true },
+//     banniere: { type: String, required: true },
+//     argent: {type: Number, required: true},
+//     trophe: [{type: mongoose.Schema.Types.ObjectId, ref: 'Item'}],
+//     quetes: {
+//         etape: {type: Number},
+//         etat: { type: Number},
+//         type: {type: [mongoose.Schema.Types.ObjectId], ref: 'Quete'},
+//         valid: { type: Boolean},
+//     },
+//     niveau: {type: Number, required: true},
+//     experience: {type: Number, required: true},
+// });
+
+// export const GuildeEntity = model<Guilde>('Guilde', schemaGuilde);
+
+// export interface Pnj {
+//     nom: string
+//     imageUrl?: string
+//     famille: 'Emmeraude' | 'Rubis' | 'Saphir' | 'Améthyste' | 'Prophète' | 'Orbe de feu' | 'autre'
+//     description: string
+//     age?: number
+//     devise?: string
+//     lieu?: Types.ObjectId
+//     metier?: string
+// }
+
+// export interface Guide extends Pnj {
+//     quete: Types.ObjectId
+//     attaques: {
+//         type: Types.ObjectId
+//         lvl: number
+//     }[]
+//     bonus?: {
+//         type: Types.ObjectId
+//         lvl: number
+//     }[]
+// }
+
+// const schemaGuide = new Schema<Guide>({
+//     nom: { type: String, required: true },
+//     imageUrl: { type: String},
+//     famille: { type: String, required: true },
+//     description: { type: String, required: true },
+//     age: { type: Number },
+//     devise: { type: String,},
+//     lieu: {type: mongoose.Schema.Types.ObjectId, ref: 'Place'},
+//     metier: { type: String},
+//     quete: {type: mongoose.Schema.Types.ObjectId, ref: 'Quete', required: true },
+//     attaques: [{
+//         type: { type: mongoose.Schema.Types.ObjectId, ref: 'Attaque', required: true},
+//         lvl: { type: Number, required: true },
+//     }],
+//     bonus: [{
+//         type: { type: mongoose.Schema.Types.ObjectId, ref: 'Bonus', required: true},
+//         lvl: { type: Number, required: true },
+//     }]
+// })
+
+// export const GuideEntity = model<Guide>('Guide', schemaGuide);
+
+// const schemaPnj = new Schema<Pnj>({
+//     nom: { type: String, required: true },
+//     imageUrl: { type: String},
+//     famille: { type: String, required: true },
+//     description: { type: String, required: true },
+//     age: { type: Number },
+//     devise: { type: String},
+//     lieu: {type: mongoose.Schema.Types.ObjectId, ref: 'Place'},
+//     metier: { type: String}
+// })
+
+// export const PnjEntity = model<Pnj>('Pnj', schemaPnj);
+
+// import mongoose, { Schema, Types, model } from 'mongoose';
+
+// export interface Creature {
+//     nom: string
+//     imageUrl: string
+//     description: string
+//     attaques: Types.ObjectId[]
+//     lieuxHabitat: {
+//         lieu: Types.ObjectId
+//         rarete: number
+//     }[]
+//     loot?:Collection<Types.ObjectId,number>
+//     lvl: number
+//     capturePossible: boolean
+// }
+
+// const schemaCreature = new Schema<Creature>({
+//     nom: { type: String, required: true },
+//     imageUrl: { type: String, required: true },
+//     description: { type: String, required: true },
+//     attaques: { type: [mongoose.Schema.Types.ObjectId], ref: 'Attaque', required: true},
+//     lieuxHabitat:[{
+//         lieu: { type: mongoose.Schema.Types.ObjectId, ref: 'Place', required: true},
+//         rarete: { type: Number, required: true },
+//     }],
+//     loot: {type: Collection<Types.ObjectId,Number>, ref: 'Item' || 'Ressource' || 'Utilitaire' || 'ObjetQuete' || 'Equipement'},
+//     lvl: { type: Number, required: true },
+//     capturePossible: { type: Boolean, required: true },
+// });
+
+// export const CreatureEntity = model<Creature>('Creature', schemaCreature);
+
+
+// import mongoose, { Schema, Types, model } from 'mongoose';
+
+// export interface Lieu {
+//     nom: string
+//     description: string
+//     imageUrl?: string
+// }
+
+// export interface Region extends Lieu {
+//     voyages?: Collection<Types.ObjectId,number>
+// }
+
+// export interface Place extends Lieu {
+//     region: Types.ObjectId
+//     pnjs: Types.ObjectId[]
+//     ressource: Collection<Types.ObjectId,number>
+//     lieuxAdjacents: Types.ObjectId[]
+// }
+
+// const schemaRegion = new Schema<Region>({
+//     nom: { type: String, required: true },
+//     description: { type: String, required: true },
+//     imageUrl: { type: String},
+//     voyages: { type:Collection<Types.ObjectId,Number>, ref: 'Region'}
+// });
+
+// export const RegionEntity = model<Region>('Region', schemaRegion);
+
+// const schemaPlace = new Schema<Place>({
+//     nom: { type: String, required: true },
+//     description: { type: String, required: true },
+//     imageUrl: { type: String},
+//     region: { type: mongoose.Schema.Types.ObjectId, ref: 'Region', required: true},
+//     pnjs: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Pnj', required: true}],
+//     ressource: { type:Collection<Types.ObjectId,Number>, ref: 'Ressource', required: true},
+//     lieuxAdjacents: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Place', required: true}]
+// });
+
+// export const PlaceEntity = model<Place>('Place', schemaPlace);
+
+// export interface Message {
+//     categorie: string
+//     contenuMessage: string
+//     arguments: string[]
+//     messageSuivant: Types.ObjectId[]
+//     auteur: Types.ObjectId
+//     image?: string
+// }
+
+// const schemaMessage = new Schema<Message>({
+//     categorie: { type: String, required: true },
+//     contenuMessage: { type: String, required: true },
+//     arguments: [{ type: String, required: true }],
+//     messageSuivant: [{type: mongoose.Schema.Types.ObjectId, ref: 'Message', required: true }],
+//     auteur: {type: mongoose.Schema.Types.ObjectId, ref: 'Pnj', required: true },
+//     image: { type: String}
+// })
+
+// export const MessageEntity = model<Message>('Message', schemaMessage);
+
+// import mongoose, { Schema, Types, model, Model } from 'mongoose';
+
+// export interface Quete {
+//     nom: string
+//     type: "principal" | "guide" | "secondaire" | "speciale"
+//     description: string
+//     etape?: number
+//     depart?: {
+//         dialogue?: Types.ObjectId
+//         lieu?: Types.ObjectId
+//         pnj?: Types.ObjectId
+//     }
+//     fin: {
+//         quetesuivante?: Types.ObjectId
+//         dialogue?: Types.ObjectId
+//         finserie: boolean
+//     }
+//     objectif: ObjectifQuete
+//     recompense: {
+//         argent?: number
+//         xp?:number
+//         item?: {
+//             type: Types.ObjectId
+//             nbr: number
+//         }
+//         familier?: Types.ObjectId
+//     }
+// }
+
+// export type ObjectifQuete = TuerCreatureObjectifQuete | ParlerPnjObjectifQuete | RecupererItemObjectifQuete
+
+// export enum ObjectifQueteType {
+//     TuerCreature, ParlerPnj, RecupererItem
+// }
+
+// interface BaseObjectifQuete {
+//     type: ObjectifQueteType
+// }
+
+// interface TuerCreatureObjectifQuete extends BaseObjectifQuete {
+//     type: ObjectifQueteType.TuerCreature
+//     creatures: Collection<Types.ObjectId, number>
+// }
+
+// interface ParlerPnjObjectifQuete extends BaseObjectifQuete {
+//     type: ObjectifQueteType.ParlerPnj
+//     pnj: Types.ObjectId
+//     dialogues: Types.ObjectId[]
+// }
+
+// interface RecupererItemObjectifQuete extends BaseObjectifQuete {
+//     type: ObjectifQueteType.RecupererItem
+//     items: Collection<Types.ObjectId, number>
+// }
+
+
+
+// const schemaQuete = new Schema<Quete>({
+//     nom: { type: String, required: true },
+//     type: { type: String, required: true },
+//     description: { type: String, required: true },
+//     etape: {type: Number},
+//     depart: {
+//         lieu: {type: mongoose.Schema.Types.ObjectId, ref: 'Place'},
+//         pnj: {type: mongoose.Schema.Types.ObjectId, ref: 'Pnj'},
+//         dialogue: {type: mongoose.Schema.Types.ObjectId, ref: 'Dialogue'},
+//     },
+//     fin: {
+//         quetesuivante: {type: mongoose.Schema.Types.ObjectId, ref: 'Quete'},
+//         dialogue: {type: mongoose.Schema.Types.ObjectId, ref: 'Dialogue'},
+//         finserie: { type: Boolean, required: true },
+//     },
+//     objectif: {
+//         type: Types.Subdocument, required: true
+//     },
+//     recompense: {
+//         argent: {type: Number},
+//         xp:{type: Number},
+//         item: [{
+//             type: {type: mongoose.Schema.Types.ObjectId, ref: 'Item' || 'Ressource' || 'Utilitaire' || 'ObjetQuete' || 'Equipement'},
+//             nbr: {type: Number},
+//         }],
+//         familier: {type: mongoose.Schema.Types.ObjectId, ref: 'Creature'},
+//     }
+// });
+
+// export const QueteEntity = model<Quete>('Quete', schemaQuete);
+
+// export interface Vente {
+//     lieuVente: 'hotelVente' | Types.ObjectId //Pnj vendeur
+//     vendeur: Types.ObjectId
+//     item: Types.ObjectId
+//     nombre: number
+//     prix: number
+// }
+
+// const schemaVente = new Schema<Vente>({
+//     lieuVente: { type: String || Types.ObjectId, ref: 'Pnj' || 'Guilde', required: true },
+//     vendeur: { type: mongoose.Schema.Types.ObjectId, ref: 'Pnj' || 'Personnage', required: true },
+//     item: {type: mongoose.Schema.Types.ObjectId, ref: 'Item' || 'Ressource' || 'Utilitaire' || 'ObjetQuete' || 'Equipement', required: true },
+//     nombre: {type: Number, required: true},
+//     prix: {type: Number, required: true}
+// })
+
+// export const VenteEntity = model<Vente>('Vente', schemaVente);
+
+// import mongoose, { Schema, Types, model } from 'mongoose';
+
+// export interface Banque {
+//     proprietaire: Types.ObjectId
+//     contenue: Collection<Types.ObjectId,number>
+//     lvl: number
+// }
+
+// const schemaBanque = new Schema<Banque>({
+//     proprietaire:  { type: mongoose.Schema.Types.ObjectId, ref: 'Guilde' || 'Personnage', required: true },
+//     contenue: { type: Collection<Types.ObjectId,Number>, ref: 'Item' || 'Ressource' || 'Utilitaire' || 'ObjetQuete' || 'Equipement', required: true },
+//     lvl: {type: Number, required: true}
+// })
+
+// export const BanqueEntity = model<Banque>('Banque', schemaBanque);
+
+// export interface Bonus {
+//     nom: string
+//     description?: string
+//     cible: 'force' | 'vitalite' | 'resistance' | 'precision' | 'intelligence' | 'rapidite' | 'magie' | 'attaque' | 'attaque-distance' | 'attaque-contact' | 'attaque-magique' | 'defense' | 'defense-magique' | 'esquive' | 'esquive-magique' | 'fuite' | 'fuite-magique' | 'endormissement' | 'feu' | 'eau' | 'nature' | 'illusion' | 'pm' | 'pv' | 'vitesse' | 'fortune' | 'fortune-xp' | 'fortune-argent' | 'fortune-ressource' | 'seduction' /*attraper des familier*/ 
+//     valeur: number
+// }
+
+
+// const schemaBonus = new Schema<Bonus>({
+//     nom: { type: String, required: true },
+//     description: { type: String },
+//     cible: { type: String, required: true },
+//     valeur: { type: Number, required: true }
+// })
+
+// export const BonusEntity = model<Bonus>('Bonus', schemaBonus);
+
+// import mongoose, { Schema, Types, model } from 'mongoose';
+
+// export interface Coffre {
+//     nom: string
+//     description?: string
+//     items: {
+//         nombre: {
+//             min: number 
+//             max: number
+//         }
+//         listeItem: Collection<Types.ObjectId,number> //Item + proba
+//     }
+//     argent: {
+//         min: number
+//         max: number
+//     }
+//     xp: {
+//         min: number
+//         max: number
+//     }
+//     familier: Collection<Types.ObjectId,number> //Familier + proba
+// }
+
+// const schemaCoffre = new Schema<Coffre>({
+//     nom: { type: String, required: true },
+//     description: { type: String },
+//     items: {
+//         nombre: {
+//             min: {type: Number, required: true},
+//             max: {type: Number, required: true},
+//         },
+//         listeItem: {type: Map<Types.ObjectId,Number>, ref: 'Item' || 'Ressource' || 'Utilitaire' || 'Equipement', required: true}
+//     },
+//     argent: {
+//         min: {type: Number, required: true},
+//         max: {type: Number, required: true},
+//     },
+//     xp: {
+//         min: {type: Number, required: true},
+//         max: {type: Number, required: true},
+//     },
+//     familier: {type: Map<Types.ObjectId,Number>, ref: 'Creature', required: true}
+// })
+
+// export const CoffreEntity = model<Coffre>('Coffre', schemaCoffre);
+
+// export interface Attaque {
+//     nom: string
+//     description: string
+//     type: "magique" | "contact" | "distance" | "autre"
+//     bonus: Types.ObjectId
+//     degat:{
+//         min: number
+//         max: number
+//     }
+//     pm: number
+// }
+
+// const schemaAttaque = new Schema<Attaque>({
+//     nom: { type: String, required: true },
+//     description: { type: String, required: true },
+//     type: { type: String, required: true },
+//     bonus: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Bonus', required: true}],
+//     degat:{
+//         min: {type: Number, required: true},
+//         max: {type: Number, required: true},
+//     },
+//     pm: {type: Number, required: true},
+// });
+
+// export const AttaqueEntity = model<Attaque>('Attaque', schemaAttaque);

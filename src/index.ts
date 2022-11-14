@@ -1,8 +1,8 @@
 import { Client, Intents } from 'discord.js'
 import { commandes } from './commands'
 import { onceReady, onInteractionCreate } from './handlers'
-import { connect } from './db'
 import './server'
+import pool from './infrastructure/db'
 
 const token = process.env.DISCORD_TOKEN
 
@@ -11,10 +11,6 @@ const bot = new Client({
     Intents.FLAGS.GUILDS, 
     Intents.FLAGS.GUILD_MESSAGES
   ]
-})
-
-connect().then(() => {
-  console.log("Successfuly connected to database")
 })
 
 onceReady(bot, commandes)
