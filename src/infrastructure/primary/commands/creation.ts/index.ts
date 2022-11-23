@@ -1,7 +1,7 @@
-import { EntreeUtilisateurCommande } from "../Command"
-import { CreaCommand } from "./CreaObjetCommand"
+// import { EntreeUtilisateurCommande } from "../Command"
+// import { CreaCommand } from "./CreaObjetCommand"
 
 
-export const creaCommands: EntreeUtilisateurCommande[] = [
-   CreaCommand
-]
+// export const creaCommands: EntreeUtilisateurCommande[] = [
+//    CreaCommand
+// ]

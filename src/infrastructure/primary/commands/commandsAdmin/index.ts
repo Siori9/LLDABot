@@ -1,7 +1,7 @@
-import { EntreeUtilisateurCommande } from "../Command"
-import { ModoCommand } from "./NouvModo"
+// import { EntreeUtilisateurCommande } from "../Command"
+// import { ModoCommand } from "./NouvModo"
 
 
-export const adminCommands: EntreeUtilisateurCommande[] = [
-    ModoCommand
-]
+// export const adminCommands: EntreeUtilisateurCommande[] = [
+//     ModoCommand
+// ]

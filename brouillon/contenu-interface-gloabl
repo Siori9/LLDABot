@@ -1,0 +1,12 @@
+
+
+> domain : métier du bot, on y retrouvera tous les systèmes du style sytème de combat,... -> couche centrale
+    > models : ensemble des interfaces du code
+    > services : toutes les fonctions pour gérer les systèmes...
+
+> infrastructure : couche en dehors du métier
+    > primary : couche du dessus, donc Discord
+        > commands : ensemble des commandes discord
+        > handlers : autres intéractions avec discord
+    > secondary : couche du dessous, donc lié à la base de donnée
+        > repositories :

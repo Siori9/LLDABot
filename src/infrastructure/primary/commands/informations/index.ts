@@ -1,7 +1,7 @@
-import { EntreeUtilisateurCommande } from "../Command"
-import { InfoGuide } from "./InfoGuideCommand"
+// import { EntreeUtilisateurCommande } from "../Command"
+// import { InfoGuide } from "./InfoGuideCommand"
 
 
-export const infoCommands: EntreeUtilisateurCommande[] = [
-    InfoGuide
-]
+// export const infoCommands: EntreeUtilisateurCommande[] = [
+//     InfoGuide
+// ]
